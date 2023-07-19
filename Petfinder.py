@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 
-
 ANIMAL_TYPES_LIST = [None, 'Dog', 'Cat', 'Rabbit', 'Small-Furry', 'Horse',
                      'Bird', 'Scales-Fins-Other', 'Barnyard']
 ANIMAL_GENDERS_LIST = [None, 'Male', 'Female']
@@ -17,7 +16,7 @@ def get_token(API_key, API_secret):
         'grant_type': 'client_credentials',
         'client_id': API_key,
         'client_secret': API_secret,
-    })  # Access token request
+    })  
     return response.json()['access_token']
 
 
@@ -40,7 +39,6 @@ def parse_animals(animals_json):
     count = 0
 
     for animal in animals_json["animals"]:
-        # Add info
         animals_dict[count] = {
             'id': animal["id"],
             'type': animal["type"],
@@ -58,6 +56,12 @@ def parse_animals(animals_json):
             'contact(phone)': animal["contact"]["phone"],
         }
 
+        address_text = ""
+        for line in animal["contact"]["address"].values():
+            if (line is not None):
+                address_text += line + " "
+        animals_dict[count]['contact(address)'] = address_text
+
         try:
             photomedium = animal["primary_photo_cropped"]["medium"]
             animals_dict[count]['photos'] = photomedium
@@ -66,12 +70,12 @@ def parse_animals(animals_json):
             animals_dict[count]['photos'] = None
         except IndexError:
             animals_dict[count]['video'] = None
-        
+
         count += 1
 
-        animalsdf = pd.DataFrame.from_dict(animals_dict,
+    animalsdf = pd.DataFrame.from_dict(animals_dict,
                                        orient='index')
-        return animalsdf
+    return animalsdf
 
 def valid_input(user_response, valid_types_list):
     for valid_type in valid_types_list:
@@ -114,7 +118,8 @@ def build_url(dict_inputs):
         return 'https://api.petfinder.com/v2/animals'
     else:
         return url
-    
+
+
 def loop_input_menu(menu_options, request_msg, min_menu_op=0):
     menu(menu_options)
     option = handle_option(input(request_msg))
@@ -128,31 +133,26 @@ def loop_input_menu(menu_options, request_msg, min_menu_op=0):
 def user_input():
     dict_inputs = {}
 
-    # Request animal type
     print_header('Available Animals For Adoption')
     option = loop_input_menu(ANIMAL_TYPES_LIST,
                              'Animal preference: ')
     dict_inputs['type'] = ANIMAL_TYPES_LIST[option]
 
-    # Request gender
     print_header('Gender options')
     option = loop_input_menu(ANIMAL_GENDERS_LIST,
                              'Gender preference: ')
     dict_inputs['gender'] = ANIMAL_GENDERS_LIST[option]
 
-    # Request Age
     print_header('Age Ranges')
     option = loop_input_menu(ANIMAL_AGE_LIST,
                              'Age preference: ')
     dict_inputs['age'] = ANIMAL_AGE_LIST[option]
 
-    # Request Size
     print_header('Animal Size')
     option = loop_input_menu(ANIMAL_SIZE_LIST,
                              'Size preference: ')
     dict_inputs['size'] = ANIMAL_SIZE_LIST[option]
 
-    # Request Location and Distance
     print_header('Would you like to give a location')
     option = loop_input_menu(YES_NO_OPTION, 'Choice: ')
     if option == 1:
@@ -200,9 +200,29 @@ def user_input():
 
     return dict_inputs
 
+
 def display_profile(dataSeries, paramList=None, labelList=None, formList=None):
     if (paramList is None):
         paramList = dataSeries.keys().to_list()
+
+    if (formList is None):
+        formList = []
+    formList = formList + ("\n " * (len(paramList)-len(formList))).split(" ")
+
+    if (labelList is None):
+        labelList = paramList.copy()
+        for i in range(0, len(paramList)):
+            labelList[i] = labelList[i] + ": "
+    elif len(labelList) < len(paramList):
+        while (len(labelList) < len(paramList)):
+            labelList.append(paramList[len(labelList)] + ": ")
+
+    # Print based on specified parameters
+    for i in range(0, len(paramList)):
+        if labelList[i] is not None:
+            print(f'{labelList[i]}', end='')
+        print(f'{dataSeries.get(paramList[i])}', end=formList[i])
+
 
 def display_selected_animals(animalsdf):
     for index, animal in animalsdf.iterrows():
@@ -212,6 +232,8 @@ def display_selected_animals(animalsdf):
                         labelList=[None, None, None, "Name: "],
                         formList=["\t", " ", "\t", "\n"])
 
+
+# Gets dataframe with animals that may be selected
 def user_select_animals(animalsdf):
     print("Based on your search criteria this is what we could find: \n")
     option = len(animalsdf)
@@ -262,6 +284,16 @@ def user_select_animals(animalsdf):
         print_header("                             ")
         input("Press Enter to return to Select Screen: ")
 
+
 if __name__ == '__main__':
     AUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
     token = get_token(API_key, API_secret)
+
+    # Process user request for animals
+    output = user_input()
+    url = build_url(output)
+    response = get_request(token, url)
+    animalsdf = parse_animals(convert_to_json(response))
+
+    # Terminal visulaization of animals
+    user_select_animals(animalsdf)
