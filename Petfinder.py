@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 import secrets
 from flask_sqlalchemy import SQLAlchemy
+from Forms import PrefernceForm
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
@@ -101,6 +102,11 @@ def build_url(dict_inputs):
 @app.route("/home", methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
+@app.route("/preference", methods=['GET', 'POST'])
+def preference():
+     form = PrefernceForm()
+     return render_template('preference.html', form=form) 
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
