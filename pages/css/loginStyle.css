@@ -73,6 +73,7 @@ form .row input::placeholder{
   justify-content: center;
 }
 .wrapper form .pass{
+  text-align: center;
   margin: -8px 0 20px 0;
 }
 .wrapper form .pass a{
