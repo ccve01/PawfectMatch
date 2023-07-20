@@ -2,6 +2,16 @@ import requests
 import pandas as pd
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
+import secrets
+from flask_sqlalchemy import SQLAlchemy
+
+key = secrets.token_hex(16)
+app = Flask(__name__)
+proxied = FlaskBehindProxy(app)  ## add this line
+app.config['SECRET_KEY'] = key
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
 
 ANIMAL_TYPES_LIST = [None, 'Dog', 'Cat', 'Rabbit', 'Small-Furry', 'Horse',
                      'Bird', 'Scales-Fins-Other', 'Barnyard']
@@ -86,15 +96,20 @@ def build_url(dict_inputs):
         return 'https://api.petfinder.com/v2/animals'
     else:
         return url
+    
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
-    AUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
-    token = get_token(API_key, API_secret)
+    # AUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
+    # token = get_token(API_key, API_secret)
 
-    output={'type': 'dog', 'age':'baby', 'gender':'male'}
-    url = build_url(output)
-    response = get_request(token, url)
-    animalsdf = parse_animals(convert_to_json(response))
-    print(animalsdf)
+    # output={'type': 'dog', 'age':'baby', 'gender':'male'}
+    # url = build_url(output)
+    # response = get_request(token, url)
+    # animalsdf = parse_animals(convert_to_json(response))
+    # print(animalsdf)
 
