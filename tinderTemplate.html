@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testing</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body {background-color: #E94B8F;}
+
+
+    /*DELETE THIS*/
+.tbg {
+    /*height: 720px;
+    width: 1000px;
+   background-color: #E94B8F;
+    margin: 0 auto;
+    border: 1px solid #c0c0c0;*/
+}
+.tbgwrap { padding: 10px; }
+.theader { height: 65px; border-bottom: 1px solid #c0c0c0; }
+
+/*DELETE THIS*/
+/*.theader i.fa-comments {
+    color: #230808;
+    font-size: 40px;
+    display: inline-block;
+    float: right;
+    padding: 10px 20px;
+    position: relative;
+}
+.theader i.fa-cog {
+    color: #000000;
+    font-size: 40px;
+    display: inline-block;
+    float: left;
+    padding: 10px 20px;
+    position: relative;
+}*/
+.logo { width: 100px; margin: 0 auto; padding: 10px; }
+.logo img { width: 100px; }
+
+/*Column for Nav Bar,Picture, and Text*/
+.row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Updated styles for columns */
+        .column {
+            width: 33.33%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .left {
+            width: 25%;
+        }
+
+        .middle {
+            width: 50%;
+            text-align: center;
+        }
+
+        .right {
+            width: 25%;
+            background-color: white;
+        }
+
+
+/*Nav Bar*/
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  background-color: #fd7f2c;
+}
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+/*Background for Profile Pic*/
+.userPic {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border: 1px solid #c0c0c0;
+    padding-bottom: 60px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #c0c0c0;
+}
+.userPic img {}
+.userName {
+    padding: 15px;
+    font-size: 20px;
+    font-family: 'Helvetica', sans-serif;
+    float: left;
+}
+.userName .userAge { font-weight: 200; }
+.infoButton { font-family: 'Helvetica', sans-serif; }
+
+.infoButton .fa-users, .infoButton .fa-book {
+    color: #c0c0c0;
+    float: right;
+    position: relative;
+    font-size: 24px;
+    padding: 12px;
+}
+.controls {}
+.noButton {
+    /*background-color: #000000;
+    height: 120px;
+    width: 120px;*/
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 50px;
+    left: 25px;
+}
+/*Actual X*/
+.noButton i {
+    color: #5bff94;
+    font-size: 80px;
+    padding: 17px 28px;
+}
+.infoButton {
+    /*background-color: #cb2d2d;
+    height: 50px;
+    width:20px;*/
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    left: 5px;
+    top: 50px;
+}
+.infoButton .fa-info {
+    font-size: 60px;
+    padding: 15px 20px;
+    color: #398beb;
+}
+.heartButton {
+    
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 48px;
+    left: -20px;
+}
+.heartButton i {
+    color: #5de19c;
+    font-size: 60px;
+    padding: 35px 30px;
+}
+/*DELETE THIS*/
+/*.credit {
+    width: 400px;
+    height: auto;
+    position: relative;
+    top: 60px;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 2px 0px;
+}
+.credit a {
+    font-size: 7px;
+    letter-spacing: 5px;
+    color: #c0c0c0;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Helvetica', sans-serif;
+    font-style: italic;
+}*/
+    </style>
+</head>
+<body> 
+    <div class="logo">
+        <img src="https://worldvectorlogo.com/logos/tinder-1.svg" alt="Tinder Logo" title="Tinder Logo" />
+    </div>
+
+    <div class="row">
+        <div class="column left">
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#news">Register</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+        <center>
+        <div class="column middle">
+            <div class="tbgwrap">
+                <div class="userPic">
+                    <img src="IMG_7734.JPG" style=" width: 320px;height: 350px;"/>
+                    <div class="userName">Seager, <span class="userAge">6</span></div>
+                        <div class="infoButton">
+                            <i class="fa fa-book" aria-hidden="true"> 0</i>
+                            <i class="fa fa-users" aria-hidden="true"> 0</i></div>
+                </div>
+                    
+                    <div class="controls">
+                      <div class="heartButton"><i class="fa fa-heart" aria-hidden="true"></i></div>
+                      <div class="infoButton"><i class="fa fa-info" aria-hidden="true"></i></div>
+                      <div class="noButton"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+                  
+            </div>
+        </div>
+        </center>        
+        
+            <div class="column right" style="background-color: white;">
+                <h1>Text About Seager</h1>
+                <form action="/action_page.php">
+                    <label for="hats">Size:</label>
+                    <select name="hats" id="hats">
+                        <option value="7 1/8">7 1/8</option>
+                        <option value="7 1/4">7 1/4</option>
+                        <option value="7 3/8">7 3/8</option>
+                    </select>
+                </form>
+            </div>
+    </div>
+</body>
+<meta charset="UTF-8">
+<meta name="keywords" content="HTML">
+<meta name="description" content="Final">
+<meta name="author" content="Sergio Morones">
+<meta https-equiv="refresh" content="30">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</html>
