@@ -31,6 +31,9 @@ def get_token(API_key, API_secret):
     })  
     return response.json()['access_token']
 
+AUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
+token = get_token(API_key, API_secret)
+
 def path_to_image_html(path):
     return '<img src="' + path + '" width="60" >'
 
@@ -44,7 +47,6 @@ def convert_to_json(response):
     return response.json()
 
 def parse_animals(animals_json):
-    animalsdf = pd.DataFrame()
     animals_dict = {}
     count = 0
 
@@ -74,10 +76,8 @@ def parse_animals(animals_json):
             animals_dict[count]['video'] = None
 
         count += 1
-
-    animalsdf = pd.DataFrame.from_dict(animals_dict,
-                                       orient='index')
-    return animalsdf
+    
+    return animals_dict
  
 def get_request(access_token, BASE_url):
     headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
@@ -97,7 +97,18 @@ def build_url(dict_inputs):
         return 'https://api.petfinder.com/v2/animals'
     else:
         return url
-    
+class Data(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    type = db.Column(db.String(120), unique=False, nullable=False)
+    breed_primary = db.Column(db.String(120), unique=False, nullable=False)
+    color_primary = db.Column(db.String(120), unique=False, nullable=False)
+    age = db.Column(db.String(120), unique=False, nullable=False)
+    gender = db.Column(db.String(120), unique=False, nullable=False)
+    size = db.Column(db.String(120), unique=False, nullable=False)
+    coat = db.Column(db.String(120), unique=False, nullable=False)
+    status = db.Column(db.String(120), unique=False, nullable=False)
+
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def index():
@@ -105,13 +116,23 @@ def index():
 
 @app.route("/preference", methods=['GET', 'POST'])
 def preference():
-     form = PrefernceForm()
-     return render_template('preference.html', form=form) 
+    form = PrefernceForm()
+    if form.validate_on_submit():
+        output={'type': form.species.data, 'age':form.age.data, 'gender':form.gender.data, 'size':form.size.data}
+        url = build_url(output)
+        response = get_request(token, url)
+        animalsdf = parse_animals(convert_to_json(response))
+        print(animalsdf)
+     
+    return render_template('preference.html', form=form) 
+
+@app.route("/match", methods=['GET', 'POST'])
+def match():
+    return render_template('matchpage.html')
+    
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
-    # AUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
-    # token = get_token(API_key, API_secret)
 
     # output={'type': 'dog', 'age':'baby', 'gender':'male'}
     # url = build_url(output)
