@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login Form | CodingLab</title> 
+    <link rel="stylesheet" href="../static/css/loginStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Pick Your Partner</legend>
+            <div class="form-group">
+                {{ form.species.label(class="form-control-label") }}
+                {% if form.species.errors %}
+                  {{ form.species(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.species.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.species(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.age.label(class="form-control-label") }}
+                {% if form.age.errors %}
+                  {{ form.age(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.age.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.age(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.gender.label(class="form-control-label") }}
+                {% if form.gender.errors %}
+                  {{ form.gender(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.gender.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.gender(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.size.label(class="form-control-label") }}
+                {% if form.size.errors %}
+                  {{ form.size(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.size.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.size(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+        </fieldset>
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+     </div>
+    </form>
+  </body>
+</html>
