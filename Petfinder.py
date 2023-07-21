@@ -110,11 +110,11 @@ class Data(db.Model):
     status = db.Column(db.String(120), unique=False, nullable=False)
 
 @app.route("/", methods=['GET', 'POST'])
-@app.route("/home", methods=['GET', 'POST'])
+@app.route("/index.html", methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
-@app.route("/preference", methods=['GET', 'POST'])
+@app.route("/preference.html", methods=['GET', 'POST'])
 def preference():
     form = PrefernceForm()
     if form.validate_on_submit():
@@ -126,10 +126,18 @@ def preference():
      
     return render_template('preference.html', form=form) 
 
-@app.route("/match", methods=['GET', 'POST'])
+@app.route("/match.html", methods=['GET', 'POST'])
 def match():
     return render_template('matchpage.html')
-    
+
+@app.route("/login.html", methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
+
+@app.route("/signup.html", methods=['GET', 'POST'])
+def register():
+    return render_template('signup.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
