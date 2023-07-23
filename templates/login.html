@@ -8,26 +8,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
   </head>
   <body>
-    <div class="container">
-      <div class="wrapper">
-        <div class="title"><span>Login Form</span></div>
-        <form action="#">
-          <div class="row">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Email or Phone" required>
-          </div>
-          <div class="row">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" required>
-          </div>
-          <div class="pass"><a href="#">Forgot password?</a></div>
-          <div class="row button">
-            <input type="submit" value="Login">
-          </div>
-          <div class="signup-link">Not a member? <a href="signup.html">Signup now</a></div>
-          <div class="signup-link">Return   <a href="index.html">Home</a></div>
-        </form>
-      </div>
+    <body>
+  <div class="container">
+    <div class="wrapper">
+      <div class="title"><span>Login Form</span></div>
+      <!-- Add an ID to the form for JavaScript handling -->
+      <form action="#" id="login-form">
+        <div class="row">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Email or Phone" required>
+        </div>
+        <div class="row">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" required>
+        </div>
+        <div class="pass"><a href="#">Forgot password?</a></div>
+        <div class="row button">
+          <input type="submit" value="Login">
+        </div>
+        <div class="signup-link">Not a member? <a href="signup.html">Signup now</a></div>
+        <div class="signup-link">Return   <a href="index.html">Home</a></div>
+      </form>
     </div>
-  </body>
+  </div>
+
+  <!-- Add a script section to handle the form submission -->
+  <script>
+    // Get the login form element
+    const loginForm = document.getElementById("login-form");
+
+    // Add a submit event listener to the form
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      // Perform login logic here (e.g., validate credentials, check authentication, etc.)
+      // For demonstration purposes, let's assume login is successful after form submission
+
+      // Redirect the user to matchpage.html
+      window.location.href = "preference.html";
+    });
+  </script>
+</body>
 </html>
