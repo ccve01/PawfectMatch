@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/matchStyle.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
-    <title>Document</title>
-    <style>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../static/css/matchStyle.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+		/>
+		<title>Document</title>
+        <style>
         /* Custom styles for the header */
         body {
             margin: 0;
@@ -40,41 +46,15 @@
             text-decoration: underline;
         }
     </style>
-</head>
+	</head>
+	<body>
+        <div class="header1">
+            <a class="title" href="matchpage.html">Pawfect Match</a>
+            <a class="left" href="chatPage.html">Chatbox</a>
+        </div>
 
-<body>
-    <div class="header1">
-        <a class="title" href="index.html">Pawfect Match</a>
-        <a class="left" href="chatPage.html">Chatbox</a>
-    </div>
 
 		<div class="container">
-			<div class="side">
-				<div class="header">
-                    
-
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="title">*Profile name*</div>
-				</div>
-				<div class="menu">
-					<ul>
-						<a class="active" href="index.html">Matches</a>
-						<!--<li class="active">Messages</li>-->
-					</ul>
-				</div>
-				<div class="messages">
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad9ab2a368d4f8860532b/Best-Animal-Photos-Agora-Contest--mother-monkey-with-baby/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="message">
-						<a class="user" href="likePage.html">name</a>
-						<div class="text">details</div>
-					</div>
-				</div>
-				
-			</div>
 			<div class="content">
 				<div class="card">
 					<div class="user">
@@ -109,82 +89,194 @@
 </html>
 
 <!--<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../static/css/matchStyle.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-		/>
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="side">
-				<div class="header">
-                    
+<html>
+<head>
+    <title>Pawfect Match Profile</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body {background-color: #E94B8F;}
+    a {
+        text-decoration:none
+    }
+    /*a:link, a:visited {
+        color:black;
+        text-align:center;
+        /*text-decoration: none;
+        display: inline-block;
+    }
+    /*a:hover, a:active {
+        color: white;
+    }*/
+    * {
+        box-sizing: border-box;
+    }
+  /*Column for Nav Bar,Picture, and Text*/
+    .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    }
+    .left {
+    width: 10%;
+    }
+    .middle {
+       width: 65%;
+    }
+    .right {
+      float: right;
+    width: 25%;
+    }
+    
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+/*Nav Bar*/
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  background-color: #fd7f2c;
+}
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color: #555;
+  color: white;
+}
+/*Headers and Paragraphs*/
+  h1 {
+    color:black;
+    font-size: 18px;
+  }
+  h2 {
+    color:black;
+    font-size: 15px;
+  }
+  h3 {
+    color:green;
+    font-size: 15px;
+  }
+  p {
+    color:black;
+    font-size: 15px;
+  }
+  * {font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+    </style>
+    
+</head>
+<body> 
+    <br>&nbsp;
+    <img src="LIDS PIC" style="float:left; width: 170px;height: 130px;">
+
+    <br><br>
+    <hr size="4" width="100%" color="white">
 
 
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="title">*Profile name*</div>
-				</div>
-				<div class="menu">
-					<ul>
-						<li>Matches</li>
-						<li class="active">Messages</li>
-					</ul>
-				</div>
-				<div class="messages">
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad9ab2a368d4f8860532b/Best-Animal-Photos-Agora-Contest--mother-monkey-with-baby/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="message">
-						<div class="user">name</div>
-						<div class="text">details</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="content">
-				<div class="card">
-					<div class="user">
-						<img
-							class="user"
-							src="{{Pets.photo}}"
-							alt=""
-						/>
-						<div class="profile">
-							<div class="name">{{Pets.name}} <span>{{Pets.age}}</span></div>
-							<div class="local">
-								<i class="fas fa-map-marker-alt"></i>
-								<span>{{Pets.location}}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="buttons">
-					<div class="no">
-						<i class="fas fa-times"></i>
-					</div>
-					<div class="star">
-						<i class="fas fa-star fa"></i>
-					</div>
-					<div class="heart">
-						<i class="fas fa-heart"></i>
-					</div>
-				</div>
-				{% if Pets.video is not none %}
-				<iframe width="560" height="315" src= "{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
-				{% endif %}
-			</div>
-		</div>
-	</body>
-</html> -->
+    <div class="row">
+        <div class="column left">
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#news">Register</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+        <center>
+        <div class="column middle">
+            <img src="IMG_7734.JPG" style="float:none; width: 500px;height: 500px;">
+        </div>
+    </center>
+        <div class="column right" style="background-color: white;">
+          <h1>Chat Box</h1>
+            <form action="/action_page.php">
+            <label for="hats">Size:</label>
+            <select name="hats" id="hats">
+              <option value="6 7/8">6 7/8</option>
+              <option value="7">7</option>
+              <option value="7 1/8">7 1/8</option>
+              <option value="7 1/4">7 1/4</option>
+              <option value="7 3/8">7 3/8</option>
+              <option value="7 1/2">7 1/2</option>
+              <option value="7 5/8">7 5/8</option>
+              <option value="7 3/4">7 3/4</option>
+              <option value="7 7/8">7 7/8</option>
+              <option value="8">8</option>
+              <option value="8 1/8">8 1/8</option>
+              <option value="8 1/4">8 1/4</option>
+            </select>
+            <br><br>
+            <label for="hats">Quantity:</label>
+            <select name="hats" id="hats">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </form>
+          <button style=float:left; class="cart">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+            <span>Pet</span>
+          </button>
+
+
+          <button class="cart">
+            <span>Cancel</span>
+          </button>
+
+          <button style=float:right; class="cart">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+            <span>Human</span>
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <center><h2>Recommended Products</h2>
+        <div class="row">
+            <div class="column">
+                <img src="IMG_7733.jpg" style="width: 170px;height: 130px;">        
+            <h1>Dog 1</h1>            </div>
+            <div class="column">
+                <img src="test.png.jpg" style="width: 170px;height: 130px;">
+        <h1>Dog 2</h1>
+            </div>
+        </div>
+        </center>
+    
+    
+</div>
+
+
+
+<br>
+    <center><h2>Follow Us</h2>
+        <a href="https://www.facebook.com"><img src="facebook-logo.png" style="width: 45px;height: 70px;"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.instagram.com/?hl=en"><img src="instagram-logo.png" style="width: 45px;height: 70px;"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://twitter.com"><img src="twitter-logo.png" style="width: 45px;height: 70px;"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.youtube.com/c/lids"><img src="youtube-logo.png" style="width: 45px;height: 70px;"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.tiktok.com"><img src="tiktok-logo.png" style="width: 45px;height: 70px;"></a>
+    </center>
+
+</body>
+<meta charset="UTF-8">
+<meta name="keywords" content="HTML">
+<meta name="description" content="Final">
+<meta name="author" content="Sergio Morones">
+<meta https-equiv="refresh" content="30">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</html>-->

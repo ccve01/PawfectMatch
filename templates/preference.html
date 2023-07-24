@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login Form | CodingLab</title> 
-    <link rel="stylesheet" href="../static/css/loginStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-  </head>
-  <body>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form | CodingLab</title>
+  <link rel="stylesheet" href="../static/css/loginStyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <style>
+    .form-group label {
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    /* Make the box larger */
+    .container {
+      max-width: 600px; 
+    }
+    .container .wrapper .row i {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Preference Form</span></div>
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Pick Your Partner</legend>
-            <div class="form-group">
-                {{ form.species.label(class="form-control-label") }}
-                {% if form.species.errors %}
-                  {{ form.species(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.species.errors%}
-                        <span>{{error}}</span>
-                    {% endfor %}
-                  </div>
-              {% else %}
-                  {{ form.species(class="form-control form-control-lg") }}
-              {% endif %}
+          <legend class="border-bottom mb-4">Pick Your Partner</legend>
+          <div class="row">
+            <label for="{{ form.species.id }}">Select animal species</label>
+            {{ form.species(class="form-control form-control-lg", placeholder="Species") }}
+            {% if form.species.errors %}
+            <div class="invalid-feedback">
+              {% for error in form.species.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.age.label(class="form-control-label") }}
-                {% if form.age.errors %}
-                  {{ form.age(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.age.errors%}
-                        <span>{{error}}</span>
-                    {% endfor %}
-                  </div>
-              {% else %}
-                  {{ form.age(class="form-control form-control-lg") }}
-              {% endif %}
+            {% endif %}
+          </div>
+          <div class="row">
+            <label for="{{ form.age.id }}">Select animal age</label>
+            {{ form.age(class="form-control form-control-lg", placeholder="Age") }}
+            {% if form.age.errors %}
+            <div class="invalid-feedback">
+              {% for error in form.age.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.gender.label(class="form-control-label") }}
-                {% if form.gender.errors %}
-                  {{ form.gender(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.gender.errors%}
-                        <span>{{error}}</span>
-                    {% endfor %}
-                  </div>
-              {% else %}
-                  {{ form.gender(class="form-control form-control-lg") }}
-              {% endif %}
+            {% endif %}
+          </div>
+          <div class="row">
+            <label for="{{ form.gender.id }}">Select Gender</label>
+            {{ form.gender(class="form-control form-control-lg", placeholder="Gender") }}
+            {% if form.gender.errors %}
+            <div class="invalid-feedback">
+              {% for error in form.gender.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.size.label(class="form-control-label") }}
-                {% if form.size.errors %}
-                  {{ form.size(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.size.errors%}
-                        <span>{{error}}</span>
-                    {% endfor %}
-                  </div>
-              {% else %}
-                  {{ form.size(class="form-control form-control-lg") }}
-              {% endif %}
+            {% endif %}
+          </div>
+          <div class="row">
+            <label for="{{ form.size.id }}">Select size of the animal</label>
+            {{ form.size(class="form-control form-control-lg", placeholder="Size") }}
+            {% if form.size.errors %}
+            <div class="invalid-feedback">
+              {% for error in form.size.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
             </div>
-            <div class="form-group">
-              {{ form.location.label(class="form-control-label") }}
-              {% if form.location.errors %}
-                {{ form.location(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.location.errors%}
-                      <span>{{error}}</span>
-                  {% endfor %}
-                </div>
-            {% else %}
-                {{ form.location(class="form-control form-control-lg") }}
             {% endif %}
           </div>
         </fieldset>
-      <div class="form-group">
-        {{ form.submit(class="btn btn-outline-info") }}
-     </div>
-    </form>
-  </body>
+        <div class="form-group button">
+          {{ form.submit(class="btn btn-outline-info", value="Save") }} <!-- Change the submit button text to "Save" -->
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+
 </html>
