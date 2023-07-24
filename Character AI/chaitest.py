@@ -20,7 +20,7 @@ if not participants[0]['is_human']:
 else:
     tgt = participants[1]['user']['username']
 
-while True:
+if True:
     message = input('You: ')
 
     data = client.chat.send_message(
