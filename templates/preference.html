@@ -75,6 +75,19 @@
             </div>
             {% endif %}
           </div>
+          <div class="form-group">
+            {{ form.location.label(class="form-control-label") }}
+            {% if form.location.errors %}
+              {{ form.location(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.location.errors%}
+                    <span>{{error}}</span>
+                {% endfor %}
+              </div>
+          {% else %}
+              {{ form.location(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
         </fieldset>
         <div class="form-group button">
           {{ form.submit(class="btn btn-outline-info", value="Save") }} <!-- Change the submit button text to "Save" -->
