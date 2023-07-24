@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
 from flask_behind_proxy import FlaskBehindProxy
 import secrets
 from flask_sqlalchemy import SQLAlchemy
@@ -8,6 +8,7 @@ from Forms import PrefernceForm, ContactForm, NavigationForm, RegistrationForm, 
 from flask_login import UserMixin, LoginManager, login_user, logout_user, \
     current_user, login_required
 from flask_bcrypt import Bcrypt
+from chat import get_response
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
@@ -198,7 +199,6 @@ def index():
     return render_template('index.html')
 
 @app.route("/preference.html", methods=['GET', 'POST'])
-@login_required
 def preference():
     form = PrefernceForm()
     if form.validate_on_submit():
@@ -215,7 +215,6 @@ def preference():
     return render_template('preference.html', form=form) 
 
 @app.route("/match.html", methods=['GET', 'POST'])
-@login_required
 def match():
     form=ContactForm()
     Pets = db.session.query(Data).first()
@@ -322,7 +321,6 @@ def load_user(user_id):
 # Turned off Adopt page as no longer needed added information to like page
 
 @app.route("/likePage.html", methods=['GET', 'POST'])
-@login_required
 def Like():
     global spot
     Cat = db.session.query(Liked).all()
@@ -344,6 +342,20 @@ def Like():
 @app.route("/chatPage.html", methods=['GET', 'POST'])
 def Chat():
     return render_template('chatPage.html')
+
+# app = Flask(__name__)
+
+@app.get("/chat")
+def index_get():
+    return render_template("base.html")
+
+@app.post("/predict")
+def predict():
+    text = request.get_json().get("message")
+    # TODO: check if text is valid
+    response = get_response(text)
+    message = {"answer": response}
+    return jsonify(message)
 
 @app.route("/logout")
 @login_required
