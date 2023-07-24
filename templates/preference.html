@@ -5,26 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form | CodingLab</title>
-  <link rel="stylesheet" href="../static/css/loginStyle.css">
+  <link rel="stylesheet" href="../static/css/preference.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-  <style>
-    .form-group label {
-      color: #333;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    /* Make the box larger */
-    .container {
-      max-width: 600px; 
-    }
-    .container .wrapper .row i {
-      display: none;
-    }
-  </style>
 </head>
 
 <body>
   <form method="POST" action="">
+    <div class="header1">
+        <a class="title" href="index.html">Pawfect Match</a>
+    </div>
     {{ form.hidden_tag() }}
     <div class="container">
       <div class="wrapper">
@@ -90,7 +79,7 @@
         </div>
         </fieldset>
         <div class="form-group button">
-          {{ form.submit(class="btn btn-outline-info", value="Save") }} <!-- Change the submit button text to "Save" -->
+          {{ form.submit(class="btn btn-outline-info", value="Save") }} 
         </div>
       </div>
     </div>
@@ -98,3 +87,4 @@
 </body>
 
 </html>
+
