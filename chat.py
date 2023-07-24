@@ -1,7 +1,6 @@
 import random
 import json
 
-import torch
 from characterai import PyCAI
 # client = PyCAI('c43e694469173dee86270d54d98fab46dee96885')
 #
