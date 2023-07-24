@@ -1,90 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form | CodingLab</title>
-  <link rel="stylesheet" href="../static/css/preference.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-</head>
-
-<body>
-  <form method="POST" action="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login Form | CodingLab</title> 
+    <link rel="stylesheet" href="../static/css/loginStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
     <div class="header1">
         <a class="title" href="index.html">Pawfect Match</a>
     </div>
-    {{ form.hidden_tag() }}
-    <div class="container">
-      <div class="wrapper">
-        <div class="title"><span>Preference Form</span></div>
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Pick Your Partner</legend>
-          <div class="row">
-            <label for="{{ form.species.id }}">Select animal species</label>
-            {{ form.species(class="form-control form-control-lg", placeholder="Species") }}
-            {% if form.species.errors %}
-            <div class="invalid-feedback">
-              {% for error in form.species.errors %}
-              <span>{{ error }}</span>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          <div class="row">
-            <label for="{{ form.age.id }}">Select animal age</label>
-            {{ form.age(class="form-control form-control-lg", placeholder="Age") }}
-            {% if form.age.errors %}
-            <div class="invalid-feedback">
-              {% for error in form.age.errors %}
-              <span>{{ error }}</span>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          <div class="row">
-            <label for="{{ form.gender.id }}">Select Gender</label>
-            {{ form.gender(class="form-control form-control-lg", placeholder="Gender") }}
-            {% if form.gender.errors %}
-            <div class="invalid-feedback">
-              {% for error in form.gender.errors %}
-              <span>{{ error }}</span>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          <div class="row">
-            <label for="{{ form.size.id }}">Select size of the animal</label>
-            {{ form.size(class="form-control form-control-lg", placeholder="Size") }}
-            {% if form.size.errors %}
-            <div class="invalid-feedback">
-              {% for error in form.size.errors %}
-              <span>{{ error }}</span>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          <div class="form-group">
-            {{ form.location.label(class="form-control-label") }}
-            {% if form.location.errors %}
-              {{ form.location(class="form-control form-control-lg is-invalid") }}
-              <div class="invalid-feedback">
-                {% for error in form.location.errors%}
-                    <span>{{error}}</span>
-                {% endfor %}
-              </div>
-          {% else %}
-              {{ form.location(class="form-control form-control-lg") }}
-          {% endif %}
+  <div class="container">
+    <div class="wrapper">
+      <div class="title"><span>Login Form</span></div>
+      <!-- Add an ID to the form for JavaScript handling -->
+      <form action="#" id="login-form">
+        <div class="row">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Email or Phone" required>
         </div>
-        </fieldset>
-        <div class="form-group button">
-          {{ form.submit(class="btn btn-outline-info", value="Save") }} 
+        <div class="row">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" required>
         </div>
-      </div>
+        <div class="pass"><a href="#">Forgot password?</a></div>
+        <div class="row button">
+          <input type="submit" value="Login">
+        </div>
+        <div class="signup-link">Not a member? <a href="signup.html">Signup now</a></div>
+        <div class="signup-link">Return   <a href="index.html">Home</a></div>
+      </form>
     </div>
-  </form>
-</body>
+  </div>
 
+  <!-- Add a script section to handle the form submission -->
+  <script>
+    // Get the login form element
+    const loginForm = document.getElementById("login-form");
+
+    // Add a submit event listener to the form
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      // Perform login logic here (e.g., validate credentials, check authentication, etc.)
+      // For demonstration purposes, let's assume login is successful after form submission
+
+      // Redirect the user to matchpage.html
+      window.location.href = "preference.html";
+    });
+  </script>
+</body>
 </html>
 
