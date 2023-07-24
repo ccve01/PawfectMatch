@@ -214,17 +214,18 @@ def login():
 def register():
     return render_template('signup.html')
 
-@app.route("/adopt.html", methods=['GET', 'POST'])
-def adopt():
-    form = PrefernceForm()
-    if form.validate_on_submit():
-        output={'type': form.species.data, 'age':form.age.data, 'gender':form.gender.data, 'size':form.size.data, 'location':form.location.data}
-        url = build_url(output)
-        response = get_request(token, url)
-        animalsdf = parse_animals(convert_to_json(response))
-        # print(animalsdf)
+# @app.route("/adopt.html", methods=['GET', 'POST'])
+# def adopt():
+#     form = PrefernceForm()
+#     if form.validate_on_submit():
+#         output={'type': form.species.data, 'age':form.age.data, 'gender':form.gender.data, 'size':form.size.data, 'location':form.location.data}
+#         url = build_url(output)
+#         response = get_request(token, url)
+#         animalsdf = parse_animals(convert_to_json(response))
+#         # print(animalsdf)
     
-    return render_template('adopt.html')
+#     return render_template('adopt.html')
+# Turned off Adopt page as no longer needed added information to like page
 
 @app.route("/likePage.html", methods=['GET', 'POST'])
 def Like():
