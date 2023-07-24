@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 import secrets
 from flask_sqlalchemy import SQLAlchemy
-from Forms import PrefernceForm
+from Forms import PrefernceForm, ContactForm, NavigationForm
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
@@ -13,6 +13,7 @@ app.config['SECRET_KEY'] = key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+spot = 0
 
 ANIMAL_TYPES_LIST = [None, 'Dog', 'Cat', 'Rabbit', 'Small-Furry', 'Horse',
                      'Bird', 'Scales-Fins-Other', 'Barnyard']
@@ -47,10 +48,10 @@ def convert_to_json(response):
 
 def parse_animals(animals_json):
     animals_dict = {}
-    count = 0
+    spot = 0
 
     for animal in animals_json["animals"]:
-        animals_dict[count] = {
+        animals_dict[spot] = {
             'id': animal["id"],
             'type': animal["type"],
             'breed(primary)': animal["breeds"]["primary"],
@@ -71,20 +72,20 @@ def parse_animals(animals_json):
         for line in animal["contact"]["address"].values():
             if (line is not None):
                 address_text += line + " "
-        animals_dict[count]['contact(address)'] = address_text
+        animals_dict[spot]['contact(address)'] = address_text
 
         try:
             photomedium = animal["primary_photo_cropped"]["medium"]
-            animals_dict[count]['photos'] = photomedium
-            animals_dict[count]['video'] = animal['videos'][0]["embed"]
+            animals_dict[spot]['photos'] = photomedium
+            animals_dict[spot]['video'] = animal['videos'][0]["embed"]
         except TypeError:
-            animals_dict[count]['photos'] = None
+            animals_dict[spot]['photos'] = None
         except IndexError:
-            animals_dict[count]['video'] = None
-        if 'video' not in animals_dict[count]:
-            animals_dict[count]['video'] = None
+            animals_dict[spot]['video'] = None
+        if 'video' not in animals_dict[spot]:
+            animals_dict[spot]['video'] = None
 
-        count += 1
+        spot += 1
     
     return animals_dict
  
@@ -119,7 +120,6 @@ def save_results(results):
 
     # print(results)
 
-
 class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=True)
@@ -137,7 +137,32 @@ class Data(db.Model):
     email = db.Column(db.String(120), unique=False, nullable=True)
     phone = db.Column(db.String(120), unique=False, nullable=True)
 
+class Liked(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=True)
+    type = db.Column(db.String(120), unique=False, nullable=True)
+    breed_primary = db.Column(db.String(120), unique=False, nullable=True)
+    color_primary = db.Column(db.String(120), unique=False, nullable=True)
+    age = db.Column(db.String(120), unique=False, nullable=True)
+    gender = db.Column(db.String(120), unique=False, nullable=True)
+    size = db.Column(db.String(120), unique=False, nullable=True)
+    coat = db.Column(db.String(120), unique=False, nullable=True)
+    status = db.Column(db.String(120), unique=False, nullable=True)
+    location = db.Column(db.String(120), unique=False, nullable=True)
+    photo = db.Column(db.String(120), unique=False, nullable=True)
+    video = db.Column(db.String(120), unique=False, nullable=True)
+    email = db.Column(db.String(120), unique=False, nullable=True)
+    phone = db.Column(db.String(120), unique=False, nullable=True)
 
+def save_matches(animal):
+    # print(results)
+    # print(animal['video'])
+    history = Liked(id=animal.id, name=animal.name, type=animal.type, breed_primary=animal.breed_primary, color_primary=animal.color_primary,
+                    age=animal.age, gender=animal.gender, size=animal.size, coat=animal.coat, status=animal.status, location=animal.location,
+                    photo=animal.photo, video=animal.video, email=animal.email, phone=animal.phone)
+    db.session.add(history)
+    db.session.commit()
+  
 with app.app_context():
     # db.drop_all()
     db.create_all()
@@ -165,9 +190,21 @@ def preference():
 
 @app.route("/match.html", methods=['GET', 'POST'])
 def match():
+    form=ContactForm()
     Pets = db.session.query(Data).first()
-    print(Pets.video)
-    return render_template('matchpage.html', Pets=Pets)
+    print(Pets)
+    if form.validate_on_submit():
+        if form.submit.data:
+            db.session.delete(Pets)
+            db.session.commit()
+            return redirect(url_for('match'))
+        elif form.submit2.data:
+            save_matches(Pets)
+            db.session.delete(Pets)
+            db.session.commit()
+            print('Like')
+            return redirect(url_for('match'))
+    return render_template('matchpage.html', Pets=Pets, form=form)
 
 @app.route("/login.html", methods=['GET', 'POST'])
 def login():
@@ -188,6 +225,29 @@ def adopt():
         # print(animalsdf)
     
     return render_template('adopt.html')
+
+@app.route("/likePage.html", methods=['GET', 'POST'])
+def Like():
+    global spot
+    Cat = db.session.query(Liked).all()
+    form = NavigationForm()
+    if form.validate_on_submit():
+        if form.submit.data:
+            spot -= 1 
+            if spot < 0:
+                spot = len(Cat)-1
+            return redirect(url_for('Like'))
+        elif form.submit2.data:
+            spot += 1 
+            if spot > len(Cat)-1:
+                spot = 0
+            return redirect(url_for('Like'))
+    print(Cat)
+    return render_template('likePage.html', Pets=Cat[spot], form=form)
+
+@app.route("/chatPage.html", methods=['GET', 'POST'])
+def Chat():
+    return render_template('chatPage.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)

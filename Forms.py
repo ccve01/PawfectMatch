@@ -24,3 +24,13 @@ class PrefernceForm(FlaskForm):
     location = StringField('Zipcode',
                            validators=[DataRequired(), Length(min=2, max=20)])
     submit =SubmitField('Submit')
+
+class ContactForm(FlaskForm):
+
+    submit = SubmitField('Reject')
+    submit2 = SubmitField('Like')
+
+class NavigationForm(FlaskForm):
+
+    submit = SubmitField('Back One')
+    submit2 = SubmitField('Next One')

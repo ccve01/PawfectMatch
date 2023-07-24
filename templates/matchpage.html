@@ -92,17 +92,22 @@
 						</div>
 					</div>
 				</div>
+				<form method="post">
+				{{ form.hidden_tag() }}
 				<div class="buttons">
-					<div class="no">
+					{{form.submit(class="no fas fa-times")}}
+					<!-- <div class="no">
 						<i class="fas fa-times"></i>
-					</div>
-					<div class="star">
+					</div> -->
+					{{form.submit2(class="no fas fa-star fa")}}
+					<!-- <div class="star">
 						<i class="fas fa-star fa"></i>
-					</div>
-					<div class="heart">
+					</div> -->
+					<!-- <div class="heart">
 						<i class="fas fa-heart"></i>
-					</div>
+					</div> -->
 				</div>
+				</form>
 				{% if Pets.video is not none %}
 				<iframe width="560" height="315" src= "{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
 				{% endif %}
