@@ -21,4 +21,6 @@ class PrefernceForm(FlaskForm):
     gender = SelectField(u'Select Gender', choices = myChoices3, validators = [DataRequired()])
     myChoices4 = ['Small', 'Medium', 'Large', 'Xlarge']
     size= SelectField(u'Select size of the animal', choices = myChoices4, validators = [DataRequired()])
+    location = StringField('Zipcode',
+                           validators=[DataRequired(), Length(min=2, max=20)])
     submit =SubmitField('Submit')
