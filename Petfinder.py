@@ -4,7 +4,10 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 import secrets
 from flask_sqlalchemy import SQLAlchemy
-from Forms import PrefernceForm, ContactForm, NavigationForm
+from Forms import PrefernceForm, ContactForm, NavigationForm, RegistrationForm, LoginForm
+from flask_login import UserMixin, LoginManager, login_user, logout_user, \
+    current_user, login_required
+from flask_bcrypt import Bcrypt
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
@@ -14,6 +17,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 spot = 0
+
+bcrypt = Bcrypt(app)
+# turbo = Turbo(app) #might cause problems
+
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(app)
 
 ANIMAL_TYPES_LIST = [None, 'Dog', 'Cat', 'Rabbit', 'Small-Furry', 'Horse',
                      'Bird', 'Scales-Fins-Other', 'Barnyard']
@@ -137,6 +147,21 @@ class Data(db.Model):
     email = db.Column(db.String(120), unique=False, nullable=True)
     phone = db.Column(db.String(120), unique=False, nullable=True)
 
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    User_pet = db.Column(db.String(20), nullable=True)
+    User_gender = db.Column(db.String(20), nullable=True)
+    User_age = db.Column(db.String(20), nullable=True)
+    User_size = db.Column(db.String(20), nullable=True)
+    User_location = db.Column(db.String(20), nullable=True)
+    User_image = db.Column(db.String(120), nullable=True)
+    
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.password}')"
+
 class Liked(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=True)
@@ -173,6 +198,7 @@ def index():
     return render_template('index.html')
 
 @app.route("/preference.html", methods=['GET', 'POST'])
+@login_required
 def preference():
     form = PrefernceForm()
     if form.validate_on_submit():
@@ -189,6 +215,7 @@ def preference():
     return render_template('preference.html', form=form) 
 
 @app.route("/match.html", methods=['GET', 'POST'])
+@login_required
 def match():
     form=ContactForm()
     Pets = db.session.query(Data).first()
@@ -208,11 +235,78 @@ def match():
 
 @app.route("/login.html", methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = db.session.query(User.id).filter_by(
+            username=form.username.data).first() is not None
+        if username is True:
+            password = db.session.query(
+                User.password).filter_by(
+                username=form.username.data).first()
+            password = password[0]
+            if bcrypt.check_password_hash(password, form.password.data):
+                # on if checked, None if not checked
+                remember = request.form.get('Remember')
+                if remember == 'on':
+                    remember = True
+                else:
+                    remember = False
+                print(remember)
+                flash(f'Logged in as {form.username.data}!', 'success')
+                user = User.query.filter_by(
+                    username=form.username.data).first()
+                login_user(user, remember=remember)
+                return redirect(url_for('index'))
+            else:
+                flash(f'Wrong password for {form.username.data}!', 'danger')
+                return redirect(url_for('login'))
+        else:
+            flash(
+                f'Account does not exist for {form.username.data}!',
+                'danger')
+            return redirect(url_for('login'))
+    return render_template('login.html', form=form)
 
 @app.route("/signup.html", methods=['GET', 'POST'])
 def register():
-    return render_template('signup.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():  # checks if entries are valid
+        passwordhash = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+        username = db.session.query(User.id).filter_by(
+            username=form.username.data).first() is not None
+        if username is False:
+            mail = db.session.query(User.id).filter_by(
+                email=form.email.data).first() is not None
+            if mail is False:
+                user = User(
+                    username=form.username.data,
+                    email=form.email.data,
+                    password=passwordhash,
+                    User_pet='None',
+                    User_age='None',
+                    User_size='None',
+                    User_gender='None',
+                    User_location='None',
+                    User_image='None')
+                db.session.add(user)
+                db.session.commit()
+                flash(f'Account created for {form.username.data}!', 'success')
+                print('hat')
+                return redirect(url_for('login'))  # if so - send to home page
+            else:
+                flash(f'That email is already taken please try another',
+                      'danger')
+                return redirect(url_for('register'))
+        else:
+            flash(f'That username is already taken please try another',
+                  'danger')
+            return redirect(url_for('register'))
+    return render_template('signup.html', form=form)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # @app.route("/adopt.html", methods=['GET', 'POST'])
 # def adopt():
@@ -228,6 +322,7 @@ def register():
 # Turned off Adopt page as no longer needed added information to like page
 
 @app.route("/likePage.html", methods=['GET', 'POST'])
+@login_required
 def Like():
     global spot
     Cat = db.session.query(Liked).all()
@@ -249,6 +344,13 @@ def Like():
 @app.route("/chatPage.html", methods=['GET', 'POST'])
 def Chat():
     return render_template('chatPage.html')
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash(f'Logged out', 'success')
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
