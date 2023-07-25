@@ -3,13 +3,13 @@ body {
 			text-align:center;
 			margin: 0;
 			padding: 0;
-			background: url('../images/backgroundanimals.png'), #FF4C68;
+			background: url('../images/backgroundlight.png'), #FF4C68;
       		background-size: cover;
       		height: 10%;
 		}
 
 		.header1 {
-			/*background: linear-gradient(262deg, #FF4C68, #fd267d);*/
+			background: linear-gradient(262deg, #FF4C68, #fd267d);
 			color: #fff;
 			display: flex;
 			justify-content: space-between;
