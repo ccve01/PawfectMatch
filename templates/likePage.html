@@ -18,8 +18,8 @@
     }
 
     .header1 {
-      background: linear-gradient(262deg, #FF4C68, #fd267d);
-      color: #fff;
+      /*background: linear-gradient(262deg, #FF4C68, #fd267d);*/
+      color: ##fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -30,43 +30,44 @@
       font-size: 24px;
       font-weight: bold;
       text-decoration: none;
-      color: #fff;
+      color: ##fff;
     }
 
     .left {
       font-size: 18px;
       text-decoration: none;
-      color: #fff;
+      color: ##fff;
     }
 
     .left:hover {
       text-decoration: underline;
     }
-    .contact-container {
+    /*.contact-container {
         border: 1px solid #ccc;
         padding: 10px;
         margin-top: 20px;
-      }
+      }*/
 
       /* Style for the "Contact" section */
       .contact {
         font-size: 18px;
         font-weight: bold;
-        color: #333;
+        color: #FF4C68;
         margin-bottom: 5px;
       }
 
       /* Style for the "Email" section */
       .email {
         font-size: 16px;
-        color: #777;
+        color: #FF4C68;
+        margin-bottom: 20px;
       }
 
       /* Style for the "Status" section */
       .status {
         font-size: 20px;
         font-weight: bold;
-        color: #444;
+        color: #FF4C68;
         margin-top: 20px;
       }
   </style>
@@ -85,13 +86,13 @@
   {% endwith %}
   <div class="header1">
     <a class="title" href="index.html">Pawfect Match</a>
-		<a class="left" href="profile.html">Profile</a>
-        <a class="left" href="matchpage.html">Home</a>
-		<a class="left" href="preference.html">Preference</a>
-        <div class="left">
+		<a class="title" href="profile.html">Profile</a>
+        <a class="title" href="matchpage.html">Home</a>
+		<a class="title" href="preference.html">Preference</a>
+        <div class="title">
 					<img src="{{current_user.User_image}}" alt="No Image Avaliable" />
 				</div>
-				<div class="left">{{current_user.username}}</div>
+				<div class="title">{{current_user.username}}</div>
 	</div>
 
   <div class="container">
