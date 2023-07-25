@@ -10,7 +10,9 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ff788d;
+  background: url('../images/backgroundanimals.png'), #FF4C68;
+  background-size: cover;
+  height: 10%;
 }
 .wrapper{
   position: relative;
