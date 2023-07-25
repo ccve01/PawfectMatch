@@ -25,6 +25,10 @@ p{
   font-size:3rem;
   line-height: 1.5;
 }
+/* Logo styles */
+  .logo {
+    max-width: 400px;
+  }
 
 /* Containers */
 

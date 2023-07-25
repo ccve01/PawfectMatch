@@ -9,15 +9,20 @@
 		rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 	<title>Document</title>
-	<style>
+	<!--<style>
 		/* Custom styles for the header */
 		body {
+			font-family: "Montserrat-Black";
+			text-align:center;
 			margin: 0;
 			padding: 0;
+			background: url('../images/backgroundanimals.png'), #FF4C68;
+      		background-size: cover;
+      		height: 10%;
 		}
 
 		.header1 {
-			background: linear-gradient(262deg, #FF4C68, #fd267d);
+			/*background: linear-gradient(262deg, #FF4C68, #fd267d);*/
 			color: #fff;
 			display: flex;
 			justify-content: space-between;
@@ -41,7 +46,7 @@
 		.left:hover {
 			text-decoration: underline;
 		}
-	</style>
+	</style>-->
 </head>
 
 <body>
@@ -56,14 +61,18 @@
     {% endif %}
     {% endwith %}
 	<div class="header1">
-		<a class="title" href="index.html">Pawfect Match</a>
-		<a class="left" href="profile.html">Profile</a>
-        <a class="left" href="likePage.html">Matches</a>
-		<a class="left" href="preference.html">Preference</a>
+		<a class="title" href="index.html"><img src="../static/images/pmwhitelogo.png" width=200px alt="Logo" class="logo"></a>
+		<a class="title" href="profile.html">Profile</a>
+        <a class="title" href="likePage.html">Matches</a>
+		<a class="title" href="preference.html">Preference</a>
+        <div class="title">
+					<img src="{{current_user.User_image}}" alt="No Image Avaliable" />
+				</div>
+				<div class="title">{{current_user.username}}</div>
 	</div>
 
 	<div class="container">
-		<div class="side">
+		<!--<div class="side">
 			<div class="header">
 
 
@@ -75,7 +84,7 @@
 			<div class="menu">
 				<ul>
 					<a class="active" href="likePage.html">Matches</a>
-					<!--<li class="active">Messages</li>-->
+					<!-<li class="active">Messages</li>--
 				</ul>
 			</div>
 			<div class="messages">
@@ -89,7 +98,7 @@
 				</div>
 			</div>
 
-		</div>
+		</div>-->
 		<div class="content">
 			<div class="card">
 				<div class="user">

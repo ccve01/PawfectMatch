@@ -1,7 +1,38 @@
-body{
-  font-family: "Montserrat-Black";
-  text-align:center;
-}
+body {
+			font-family: "Montserrat-Black";
+			text-align:center;
+			margin: 0;
+			padding: 0;
+			background: url('../images/backgroundlight.png'), #FF4C68;
+      		background-size: cover;
+      		height: 10%;
+		}
+
+		.header1 {
+			background: linear-gradient(262deg, #FF4C68, #fd267d);
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 20px;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+			text-decoration: none;
+			color: #fff;
+		}
+
+		.left {
+			font-size: 18px;
+			text-decoration: none;
+			color: #fff;
+		}
+
+		.left:hover {
+			text-decoration: underline;
+		}
 
 h1, h2, h3, h4, h5, h6{
   font-family:"Montserrat";
