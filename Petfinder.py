@@ -113,7 +113,7 @@ def get_request(access_token, BASE_url):
     return response
 
 def build_url(dict_inputs):
-    url = "https://api.petfinder.com/v2/animals?"
+    url = "https://api.petfinder.com/v2/animals?limit=100&"
     no_preference = True
     for key, value in dict_inputs.items():
         if value is not None:
@@ -133,6 +133,7 @@ def save_results(results):
         history = Data(id=animal['id'], name=animal['name'], type=animal['type'], breed_primary=animal['breed(primary)'], color_primary=animal['color(primary)'],
                        age=animal['age'], gender=animal['gender'], size=animal['size'], coat=animal['coat'], status=animal['status'], location=animal['contact(address)'],
                        photo=animal['photos'], video=animal['video'], email=animal['contact(email)'], phone=animal['contact(phone)'])
+        db.session.query(Data).delete()
         db.session.add(history)
         db.session.commit()
 
@@ -215,6 +216,7 @@ def preference():
         # print(url)
         response = get_request(token, url)
         animalsdf = parse_animals(convert_to_json(response))
+
         save_results(animalsdf)
         return redirect(url_for('match'))
         # for Pet in Pets:
