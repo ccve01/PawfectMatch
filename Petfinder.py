@@ -360,7 +360,7 @@ def Chat():
     return render_template('chatPage.html')
 
 @app.route("/profile.html", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def profile():
     form = ProfileForm()
     print(current_user.id)
