@@ -10,6 +10,16 @@
 </head>
 
 <body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+
+  <div class="alert alert-{{ category }}">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
   <form method="POST" action="">
     <div class="header1">
         <a class="title" href="index.html">Pawfect Match</a>

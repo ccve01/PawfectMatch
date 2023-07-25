@@ -128,12 +128,13 @@ def build_url(dict_inputs):
 
 def save_results(results):
     # print(results)
+    db.session.query(Data).delete()
+    db.session.commit()
     for animal in results.values():
         # print(animal['video'])
         history = Data(id=animal['id'], name=animal['name'], type=animal['type'], breed_primary=animal['breed(primary)'], color_primary=animal['color(primary)'],
                        age=animal['age'], gender=animal['gender'], size=animal['size'], coat=animal['coat'], status=animal['status'], location=animal['contact(address)'],
                        photo=animal['photos'], video=animal['video'], email=animal['contact(email)'], phone=animal['contact(phone)'])
-        db.session.query(Data).delete()
         db.session.add(history)
         db.session.commit()
 
@@ -216,6 +217,7 @@ def preference():
         # print(url)
         response = get_request(token, url)
         animalsdf = parse_animals(convert_to_json(response))
+        print(animalsdf)
 
         save_results(animalsdf)
         return redirect(url_for('match'))
@@ -230,6 +232,7 @@ def match():
     form=ContactForm()
     Pets = db.session.query(Data).first()
     print(Pets)
+    print(db.session.query(Data).all())
     print(current_user.User_image)
     if form.validate_on_submit():
         if form.submit.data:
@@ -357,7 +360,7 @@ def Chat():
     return render_template('chatPage.html')
 
 @app.route("/profile.html", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def profile():
     form = ProfileForm()
     print(current_user.id)
@@ -377,7 +380,7 @@ def profile():
         current_user.User_location=form.location.data
         current_user.User_image= icon
         db.session.commit()
-        print('hat')
+        flash(f'Account successfully updated!', 'danger')
         return redirect(url_for('profile'))  # if so - send to home page
     return render_template('profile.html', form=form)
 
@@ -401,7 +404,7 @@ def predict():
 def logout():
     logout_user()
     flash(f'Logged out', 'success')
-    return redirect(url_for('home'))
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8001)
