@@ -13,19 +13,19 @@ def get_response(msg, species):
     # Bird: LFQaWrz0MKXr_HjKDSUDP4mts3L22AkBGameOWEmOVA
     # Rabbit: wEKGEN3eLz6mgYFq9kPcwNFuG88KlsQCbR_JaxvvssQ
 
-    if species == 'dog':
+    if species == 'Dog':
         char = 'NOk05AzKadfMKlyLs5vFic1FSMtfZs-9oajfdf_An1g'
-    elif species == 'cat':
+    elif species == 'Cat':
         char = '9AqE4wu-geCCAddV-NEQGYCWGGlKQLB0h58pmW8dKV0'
-    elif species == 'bird':
+    elif species == 'Bird':
         char = 'LFQaWrz0MKXr_HjKDSUDP4mts3L22AkBGameOWEmOVA'
-    elif species == 'rabbit':
+    elif species == 'Rabbit':
         char = 'wEKGEN3eLz6mgYFq9kPcwNFuG88KlsQCbR_JaxvvssQ'
     elif species == None:
         #defaults to dogbot to test if the type doesnt go through
         char = 'NOk05AzKadfMKlyLs5vFic1FSMtfZs-9oajfdf_An1g'
     else:
-        #defaults to dogbot again
+        # defaults to dogbot again
         char = 'NOk05AzKadfMKlyLs5vFic1FSMtfZs-9oajfdf_An1g'
 
     # Save tgt and history_external_id
