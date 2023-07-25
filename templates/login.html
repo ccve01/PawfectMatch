@@ -7,20 +7,26 @@
   <title>Login Form | CodingLab</title>
   <link rel="stylesheet" href="../static/css/loginStyle.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  
 </head>
 
 <body>
   <div class="header1">
     <a class="title" href="index.html">Pawfect Match</a>
   </div>
+
+
   <div class="container">
     <div class="wrapper">
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
       {% for category, message in messages %}
+
       <div class="alert alert-{{ category }}">
         {{ message }}
       </div>
+
+
       {% endfor %}
       {% endif %}
       {% endwith %}
@@ -29,7 +35,14 @@
         <form method="POST" action="">
           {{ form.hidden_tag() }}
           <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Login</legend>
+            <div class="container">
+              <div class="wrapper">
+                <div class="title"><span>Login</span></div>
+                </div>
+                </div>
+
+
+            <!--<legend class="border-bottom mb-4">Login</legend>-->
             <div class="row">
               <div class="fas fa-lock">
                 {{ form.username.label(class="form-control-label") }}
@@ -45,6 +58,8 @@
                 {% endif %}
               </div>
             </div>
+
+
             <div class="row">
               <div class="fas fa-lock">
                 {{ form.password.label(class="form-control-label") }}
@@ -60,12 +75,16 @@
                 {% endif %}
               </div>
             </div>
+
+
             <div class="field">
               <label class="checkbox">
                 <input type="checkbox" name="Remember" />
                 Remember me
               </label>
             </div>
+
+
           </fieldset>
           <div class="pass"><a href="#">Forgot password?</a></div>
           <div class="row button">
