@@ -113,7 +113,7 @@ def get_request(access_token, BASE_url):
     return response
 
 def build_url(dict_inputs):
-    url = "https://api.petfinder.com/v2/animals?"
+    url = "https://api.petfinder.com/v2/animals?limit=100&"
     no_preference = True
     for key, value in dict_inputs.items():
         if value is not None:

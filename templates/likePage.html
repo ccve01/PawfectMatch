@@ -42,13 +42,42 @@
     .left:hover {
       text-decoration: underline;
     }
+    .contact-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      /* Style for the "Contact" section */
+      .contact {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      /* Style for the "Email" section */
+      .email {
+        font-size: 16px;
+        color: #777;
+      }
+
+      /* Style for the "Status" section */
+      .status {
+        font-size: 20px;
+        font-weight: bold;
+        color: #444;
+        margin-top: 20px;
+      }
   </style>
 </head>
 
 <body>
   <div class="header1">
     <a class="title" href="index.html">Pawfect Match</a>
-    <a class="left" href="chatPage.html">Chatbox</a>
+		<a class="left" href="profile.html">Profile</a>
+        <a class="left" href="matchpage.html">Home</a>
+		<a class="left" href="preference.html">Preference</a>
   </div>
 
   <div class="container">
@@ -77,8 +106,12 @@
       {% endif %}
     </div>
   </div>
-  <div class="Status">{{Pets.status}} </div>
-  <div class="contact">Contact at: {{Pets.phone}}<span> or email: {{Pets.email}}</span></div>
+      <div class="contact-container">
+        <div class="status">Status: {{Pets.status}}</div>
+        <div class="contact">Contact at: {{Pets.phone}}</div>
+        <div class="email">Email: {{Pets.email}}</div>
+    </div>
+
   <div class="container">
     <div class="chatbox">
       <div class="chatbox__support">
@@ -88,7 +121,7 @@
           </div>
           <div class="chatbox__content--header">
             <h4 class="chatbox__heading--header">{{Pets.name}}</h4>
-            <p class="chatbox__description--header">WOOF! (I'm DogBot! Hello!)</p>
+            <p class="chatbox__description--header">I'm {{Pets.name}} AI! Lets talk!</p>
           </div>
         </div>
         <div class="chatbox__messages">
