@@ -12,7 +12,8 @@ body {
       background: url('../images/backgroundanimals.png'), #FF4C68;
       background-size: cover;
       height: 10%;
-    }
+}
+    
 ::selection{
   background: rgba(26,188,156,0.3);
 }
@@ -30,7 +31,6 @@ body {
   border-radius: 5px;
   box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
 }
-
 .wrapper .title{
   height: 90px;
   background: #FF4C68;
@@ -42,7 +42,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .wrapper form{
   padding: 30px 25px 25px 25px;
 }
@@ -119,7 +118,7 @@ form .signup-link a:hover{
 }
 
 .header1 {
-            background: linear-gradient(262deg, #FF4C68, #fd267d);
+            /*background: linear-gradient(262deg, #FF4C68, #fd267d);*/
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -143,3 +142,72 @@ form .signup-link a:hover{
         .left:hover {
             text-decoration: underline;
         }
+
+    
+
+    /* Title styles */
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Form fieldset styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    /* Error message styles */
+    .invalid-feedback {
+      color: #dc3545;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    /* Submit button styles */
+    .button {
+      text-align: center;
+    }
+
+    .button input[type="submit"] {
+      padding: 12px 20px;
+      font-size: 18px;
+      background-color: #ff788d /* #007bff*/;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .button input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Custom styles for radio and checkbox inputs */
+    .form-group input[type="radio"],
+    .form-group input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    /* Additional styles for smaller screens */
+    @media (max-width: 768px) {
+      .container {
+        max-width: 90%;
+      }
+    }
