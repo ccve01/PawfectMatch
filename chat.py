@@ -1,7 +1,7 @@
 import random
 import json
 
-from characterai import PyCAI
+#from characterai import PyCAI
 # client = PyCAI('c43e694469173dee86270d54d98fab46dee96885')
 #
 # # Dog test: NOk05AzKadfMKlyLs5vFic1FSMtfZs-9oajfdf_An1g
