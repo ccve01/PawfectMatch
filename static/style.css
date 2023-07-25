@@ -9,6 +9,7 @@ body {
     font-weight: 400;
     font-size: 100%;
     background: #F1F1F1;
+    background-image: url('images/backgroundanimals.png');
 }
 
 *, html {
