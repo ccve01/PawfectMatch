@@ -387,9 +387,11 @@ def index_get():
 
 @app.post("/predict")
 def predict():
+    species = Liked().type
+
     text = request.get_json().get("message")
     # TODO: check if text is valid
-    response = get_response(text)
+    response = get_response(text, species)
     message = {"answer": response}
     return jsonify(message)
 
