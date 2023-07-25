@@ -1,98 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/matchStyle.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
-    <title>Document</title>
-    <style>
-        /* Custom styles for the header */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .header1 {
-            background: linear-gradient(262deg, #FF4C68, #fd267d);
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-        
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .left {
-            font-size: 18px;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .left:hover {
-            text-decoration: underline;
-        }
-    </style>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../static/css/matchStyle.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+	<title>Document</title>
+	<style>
+		/* Custom styles for the header */
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.header1 {
+			background: linear-gradient(262deg, #FF4C68, #fd267d);
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 20px;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+			text-decoration: none;
+			color: #fff;
+		}
+
+		.left {
+			font-size: 18px;
+			text-decoration: none;
+			color: #fff;
+		}
+
+		.left:hover {
+			text-decoration: underline;
+		}
+	</style>
 </head>
 
 <body>
-    <div class="header1">
-        <a class="title" href="index.html">Pawfect Match</a>
-        <a class="left" href="chatPage.html">Chatbox</a>
-    </div>
+	<div class="header1">
+		<a class="title" href="index.html">Pawfect Match</a>
+		<a class="left" href="chatPage.html">Chatbox</a>
+	</div>
 
-		<div class="container">
-			<div class="side">
-				<div class="header">
-                    
+	<div class="container">
+		<div class="side">
+			<div class="header">
 
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="title">*Profile name*</div>
+
+				<div class="avatar">
+					<img src="{{current_user.User_image}}" alt="" />
 				</div>
-				<div class="menu">
-					<ul>
-						<a class="active" href="likePage.html">Matches</a>
-						<!--<li class="active">Messages</li>-->
-					</ul>
-				</div>
-				<div class="messages">
-					<div class="avatar">
-						<img src="https://imageio.forbes.com/specials-images/imageserve/5faad9ab2a368d4f8860532b/Best-Animal-Photos-Agora-Contest--mother-monkey-with-baby/960x0.jpg?format=jpg&width=960" alt="" />
-					</div>
-					<div class="message">
-						<a class="user" href="likePage.html">name</a>
-						<div class="text">details</div>
-					</div>
-				</div>
-				
+				<div class="title">{{current_user.username}}</div>
 			</div>
-			<div class="content">
-				<div class="card">
-					<div class="user">
-						<img
-							class="user"
-							src="{{Pets.photo}}"
-							alt=""
-						/>
-						<div class="profile">
-							<div class="name">{{Pets.name}} <span>{{Pets.age}}</span></div>
-							<div class="local">
-								<i class="fas fa-map-marker-alt"></i>
-								<span>{{Pets.location}}</span>
-							</div>
+			<div class="menu">
+				<ul>
+					<a class="active" href="likePage.html">Matches</a>
+					<!--<li class="active">Messages</li>-->
+				</ul>
+			</div>
+			<div class="messages">
+				<div class="avatar">
+					<img src="https://imageio.forbes.com/specials-images/imageserve/5faad9ab2a368d4f8860532b/Best-Animal-Photos-Agora-Contest--mother-monkey-with-baby/960x0.jpg?format=jpg&width=960"
+						alt="" />
+				</div>
+				<div class="message">
+					<a class="user" href="likePage.html">name</a>
+					<div class="text">details</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="content">
+			<div class="card">
+				<div class="user">
+					<img class="user" src="{{Pets.photo}}" alt="" />
+					<div class="profile">
+						<div class="name">{{Pets.name}} <span>{{Pets.age}}</span></div>
+						<div class="local">
+							<i class="fas fa-map-marker-alt"></i>
+							<span>{{Pets.location}}</span>
 						</div>
 					</div>
 				</div>
-				<form method="post">
+			</div>
+			<form method="post">
 				{{ form.hidden_tag() }}
 				<div class="buttons">
 					{{form.submit(class="no fas fa-times")}}
@@ -107,12 +106,13 @@
 						<i class="fas fa-heart"></i>
 					</div> -->
 				</div>
-				</form>
-				{% if Pets.video is not none %}
-				<iframe width="560" height="315" src= "{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
-				{% endif %}
-			</div>
+			</form>
+			{% if Pets.video is not none %}
+			<iframe width="560" height="315" src="{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
+			{% endif %}
 		</div>
-		
-	</body>
+	</div>
+
+</body>
+
 </html>

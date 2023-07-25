@@ -4,11 +4,14 @@ from flask import Flask, render_template, url_for, flash, redirect, request, jso
 from flask_behind_proxy import FlaskBehindProxy
 import secrets
 from flask_sqlalchemy import SQLAlchemy
-from Forms import PrefernceForm, ContactForm, NavigationForm, RegistrationForm, LoginForm
+from Forms import PrefernceForm, ContactForm, NavigationForm, RegistrationForm, LoginForm, ProfileForm
 from flask_login import UserMixin, LoginManager, login_user, logout_user, \
     current_user, login_required
 from flask_bcrypt import Bcrypt
 from chat import get_response
+from imgur import upload_img
+from werkzeug.utils import secure_filename
+import os
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
@@ -18,6 +21,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 spot = 0
+
+IMAGES = os.path.join('static', 'images')
+app.config['UPLOAD_FOLDER'] = IMAGES
+app.config['MAX_CONTENT_PATH'] = '100000000'
 
 bcrypt = Bcrypt(app)
 # turbo = Turbo(app) #might cause problems
@@ -199,7 +206,7 @@ def index():
     return render_template('index.html')
 
 @app.route("/preference.html", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def preference():
     form = PrefernceForm()
     if form.validate_on_submit():
@@ -216,11 +223,12 @@ def preference():
     return render_template('preference.html', form=form) 
 
 @app.route("/match.html", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def match():
     form=ContactForm()
     Pets = db.session.query(Data).first()
     print(Pets)
+    print(current_user.User_image)
     if form.validate_on_submit():
         if form.submit.data:
             db.session.delete(Pets)
@@ -232,7 +240,7 @@ def match():
             db.session.commit()
             print('Like')
             return redirect(url_for('match'))
-    return render_template('matchpage.html', Pets=Pets, form=form)
+    return render_template('matchpage.html', Pets=Pets, form=form, current_user=current_user)
 
 @app.route("/login.html", methods=['GET', 'POST'])
 def login():
@@ -257,7 +265,7 @@ def login():
                 user = User.query.filter_by(
                     username=form.username.data).first()
                 login_user(user, remember=remember)
-                return redirect(url_for('index'))
+                return redirect(url_for('preference'))
             else:
                 flash(f'Wrong password for {form.username.data}!', 'danger')
                 return redirect(url_for('login'))
@@ -302,7 +310,7 @@ def register():
         else:
             flash(f'That username is already taken please try another',
                   'danger')
-            return redirect(url_for('register'))
+            return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
 @login_manager.user_loader
@@ -323,7 +331,7 @@ def load_user(user_id):
 # Turned off Adopt page as no longer needed added information to like page
 
 @app.route("/likePage.html", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def Like():
     global spot
     Cat = db.session.query(Liked).all()
@@ -347,8 +355,29 @@ def Chat():
     return render_template('chatPage.html')
 
 @app.route("/profile.html", methods=['GET', 'POST'])
+@login_required
 def profile():
-    return render_template('profile.html')
+    form = ProfileForm()
+    print(current_user.id)
+    if form.validate_on_submit():
+        f = form.profile.data
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(
+           'static', 'images', filename
+        ))
+        print(filename)
+        icon = upload_img(filename)
+        print(icon)
+        current_user.User_pet= form.species.data
+        current_user.User_age= form.age.data
+        current_user.User_gender=form.gender.data
+        current_user.User_size=form.size.data
+        current_user.User_location=form.location.data
+        current_user.User_image= icon
+        db.session.commit()
+        print('hat')
+        return redirect(url_for('profile'))  # if so - send to home page
+    return render_template('profile.html', form=form)
 
 @app.get("/chat")
 def index_get():

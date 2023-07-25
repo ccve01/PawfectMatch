@@ -1,55 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login Form | CodingLab</title> 
-    <link rel="stylesheet" href="../static/css/loginStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-  </head>
-  <body>
-    <div class="header1">
-        <a class="title" href="index.html">Pawfect Match</a>
-    </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form | CodingLab</title>
+  <link rel="stylesheet" href="../static/css/loginStyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+</head>
+
+<body>
+  <div class="header1">
+    <a class="title" href="index.html">Pawfect Match</a>
+  </div>
   <div class="container">
     <div class="wrapper">
-      <div class="title"><span>Login Form</span></div>
-      <!-- Add an ID to the form for JavaScript handling -->
-      <form action="#" id="login-form">
-        <div class="row">
-          <i class="fas fa-user"></i>
-          <input type="text" placeholder="Email or Phone" required>
-        </div>
-        <div class="row">
-          <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Password" required>
-        </div>
-        <div class="pass"><a href="#">Forgot password?</a></div>
-        <div class="row button">
-          <input type="submit" value="Login">
-        </div>
-        <div class="signup-link">Not a member? <a href="signup.html">Signup now</a></div>
-        <div class="signup-link">Return   <a href="index.html">Home</a></div>
-      </form>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% block content %}
+      <div class="content-section">
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Login</legend>
+            <div class="row">
+              <div class="fas fa-lock">
+                {{ form.username.label(class="form-control-label") }}
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.username.errors%}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="fas fa-lock">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.password.errors%}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="Remember" />
+                Remember me
+              </label>
+            </div>
+          </fieldset>
+          <div class="pass"><a href="#">Forgot password?</a></div>
+          <div class="row button">
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            <div class="signup-link">Not a member? <a href="signup.html">Signup now</a></div>
+            <div class="signup-link">Return <a href="index.html">Home</a></div>
+        </form>
+      </div>
     </div>
   </div>
-
-  <!-- Add a script section to handle the form submission -->
-  <script>
-    // Get the login form element
-    const loginForm = document.getElementById("login-form");
-
-    // Add a submit event listener to the form
-    loginForm.addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
-
-      // Perform login logic here (e.g., validate credentials, check authentication, etc.)
-      // For demonstration purposes, let's assume login is successful after form submission
-
-      // Redirect the user to matchpage.html
-      window.location.href = "preference.html";
-    });
-  </script>
+  {% endblock content %}
 </body>
-</html>
 
+</html>

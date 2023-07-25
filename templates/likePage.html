@@ -1,120 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../static/css/matchStyle.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-		/>
-		<title>Document</title>
-        <style>
-        /* Custom styles for the header */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .header1 {
-            background: linear-gradient(262deg, #FF4C68, #fd267d);
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-        
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .left {
-            font-size: 18px;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .left:hover {
-            text-decoration: underline;
-        }
-    </style>
-	</head>
-	<body>
-        <div class="header1">
-            <a class="title" href="matchpage.html">Pawfect Match</a>
-            <a class="left" href="chatPage.html">Chatbox</a>
-        </div>
 
-        <div class="container">
-        <div class="content">
-          <div class="card">
-            <div class="user">
-              <img
-                class="user"
-                src="{{Pets.photo}}"
-                alt=""
-              />
-              <div class="profile">
-                <div class="name">{{Pets.name}} <span>{{Pets.age}}</span></div>
-                <div class="local">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span>{{Pets.location}}</span>
-                </div>
-              </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/matchStyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <title>Document</title>
+  <style>
+    /* Custom styles for the header */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header1 {
+      background: linear-gradient(262deg, #FF4C68, #fd267d);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .left {
+      font-size: 18px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .left:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header1">
+    <a class="title" href="index.html">Pawfect Match</a>
+    <a class="left" href="chatPage.html">Chatbox</a>
+  </div>
+
+  <div class="container">
+    <div class="content">
+      <div class="card">
+        <div class="user">
+          <img class="user" src="{{Pets.photo}}" alt="" />
+          <div class="profile">
+            <div class="name">{{Pets.name}} <span>{{Pets.age}}</span></div>
+            <div class="local">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{Pets.location}}</span>
             </div>
           </div>
-          <form method="post">
-            {{ form.hidden_tag() }}
-            <div class="buttons">
-              {{form.submit(class="no fas fa-times")}}
-              {{form.submit2(class="no fas fa-star fa")}}
-            </div>
-            </form>
-          {% if Pets.video is not none %}
-          <iframe width="560" height="315" src= "{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
-          {% endif %}
         </div>
-        </div> 
-        <div class = "Status">{{Pets.status}} </div>
-        <div class ="contact">Contact at: {{Pets.phone}}<span> or email: {{Pets.email}}</span></div>
-        <div class="container">
-          <div class="chatbox">
-              <div class="chatbox__support">
-                  <div class="chatbox__header">
-                      <div class="chatbox__image--header">
-                          <img src={{Pets.photo}} width="48" height="48" alt="image">
-                      </div>
-                      <div class="chatbox__content--header">
-                          <h4 class="chatbox__heading--header">{{Pets.name}}</h4>
-                          <p class="chatbox__description--header">WOOF! (I'm DogBot! Hello!)</p>
-                      </div>
-                  </div>
-                  <div class="chatbox__messages">
-                      <div></div>
-                  </div>
-                  <div class="chatbox__footer">
-                      <input type="text" placeholder="Write a message...">
-                      <button class="chatbox__send--footer send__button">Send</button>
-                  </div>
-              </div>
-              <div class="chatbox__button">
-                  <button><img src="{{ url_for('static', filename='images/chatbox-icon.svg') }}" /></button>
-              </div>
-          </div>
       </div>
-      
-          <script>
-              $SCRIPT_ROOT = {{ request.script_root|tojson }};
-          </script>
-          <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
-    </body>
-  </html>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="buttons">
+          {{form.submit(class="no fas fa-times")}}
+          {{form.submit2(class="no fas fa-star fa")}}
+        </div>
+      </form>
+      {% if Pets.video is not none %}
+      <iframe width="560" height="315" src="{{Pets.video}}" frameborder="0" allowfullscreen></iframe>
+      {% endif %}
+    </div>
+  </div>
+  <div class="Status">{{Pets.status}} </div>
+  <div class="contact">Contact at: {{Pets.phone}}<span> or email: {{Pets.email}}</span></div>
+  <div class="container">
+    <div class="chatbox">
+      <div class="chatbox__support">
+        <div class="chatbox__header">
+          <div class="chatbox__image--header">
+            <img src={{Pets.photo}} width="48" height="48" alt="image">
+          </div>
+          <div class="chatbox__content--header">
+            <h4 class="chatbox__heading--header">{{Pets.name}}</h4>
+            <p class="chatbox__description--header">WOOF! (I'm DogBot! Hello!)</p>
+          </div>
+        </div>
+        <div class="chatbox__messages">
+          <div></div>
+        </div>
+        <div class="chatbox__footer">
+          <input type="text" placeholder="Write a message...">
+          <button class="chatbox__send--footer send__button">Send</button>
+        </div>
+      </div>
+      <div class="chatbox__button">
+        <button><img src="{{ url_for('static', filename='images/chatbox-icon.svg') }}" /></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $SCRIPT_ROOT = {{ request.script_root | tojson }};
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>

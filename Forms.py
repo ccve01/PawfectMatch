@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, FileField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -43,3 +43,17 @@ class NavigationForm(FlaskForm):
 
     submit = SubmitField('Back One')
     submit2 = SubmitField('Next One')
+
+class ProfileForm(FlaskForm):
+    myChoices = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Barnyard']
+    species = SelectField(u'Select animal Species', choices = myChoices, validators = [DataRequired()])
+    myChoices2 = ['Baby', 'Young', 'Adult', 'Senior']
+    age = SelectField(u'Select animal age', choices = myChoices2, validators = [DataRequired()])
+    myChoices3 = ['Male', 'Female']
+    gender = SelectField(u'Select Gender', choices = myChoices3, validators = [DataRequired()])
+    myChoices4 = ['Small', 'Medium', 'Large', 'Xlarge']
+    size= SelectField(u'Select size of the animal', choices = myChoices4, validators = [DataRequired()])
+    location = StringField('Zipcode',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    profile = FileField()
+    submit =SubmitField('Submit')
