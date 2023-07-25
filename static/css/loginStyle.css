@@ -7,10 +7,11 @@
 }
 body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(262deg, #FF4C68, #fd267d);
-      
       margin: 0;
       padding: 0;
+      background: url('../images/backgroundanimals.png'), #FF4C68;
+      background-size: cover;
+      height: 10%;
     }
 ::selection{
   background: rgba(26,188,156,0.3);
