@@ -1,7 +1,7 @@
 import random
 import json
 
-from characterai import PyCAI
+#from characterai import PyCAI
 
 #TODO: change the client token so that the name isnt my own
 
