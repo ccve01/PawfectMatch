@@ -7,7 +7,7 @@
 
 A Tinder-style adoption app for pets that lets you talk to them before you adopt using AI
 
-## FAQ
+## 🐾 FAQ 
 
 #### How does it work?
 
@@ -20,7 +20,7 @@ In your matches, you can go through and talk to each animal that you have chosen
 #### Can I upload my own animal?
 
 Yes! If you click the **Profile** button, you can input the information and upload a photo of your own pet.
-## Run Locally
+## 💻 Run Locally
 
 **Clone** the project
 
@@ -52,7 +52,7 @@ Go to the **project directory**
 ```
 
 
-## Authors
+## 🐕 Authors 🐈
 - [@Jesus Santana](https://www.github.com/ccve01) - Back-End Developer
 - [@Khalil Felder](https://www.github.com/dewyig) - Full-Stack Developer
 - [@Dayra Leon](https://www.github.com/dayraleon) - Front-End Developer
@@ -60,7 +60,7 @@ Go to the **project directory**
 
 
 
-## Screenshots
+## 📸 Screenshots
 
 ![App Screenshot](https://i.imgur.com/6lZhEGh.png)
 
@@ -69,7 +69,7 @@ Go to the **project directory**
 ![App Screenshot](https://i.imgur.com/FnYBbmg.png)
 
 
-## Acknowledgements
+## 💐 Acknowledgements
 
  - [Petfinder API](https://www.petfinder.com/developers/)
  - [kramcat's CharacterAI API](https://github.com/kramcat/CharacterAI)
