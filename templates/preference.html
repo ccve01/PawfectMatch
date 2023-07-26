@@ -20,13 +20,19 @@
   {% endfor %}
   {% endif %}
   {% endwith %}
-  <form method="POST" action="">
-    <div class="header1">
-      <a class="title" href="index.html"><img src="../static/images/pmcircle.png" width=50px alt="Logo" class="logo"></a>
-		<a class="title" href="profile.html">Profile</a>
+  <div class="header1">
+		<a class="title" href="index.html"><img src="../static/images/pmwhitelogo.png" width=200px alt="Logo" class="logo"></a>
+		{% if not current_user.User_image=='None' %}
+		<div class="title">
+			<img src="{{current_user.User_image}}" width= 48px height= 48px alt="No Image Avaliable" />
+		</div>
+		{% endif %}
+		<a class="title" href="profile.html">{{current_user.username}}</a>
+    <a class="title" href="match.html">Home</a>
         <a class="title" href="likePage.html">Matches</a>
-		<a class="title" href="matchpage.html">Home</a>
-    </div>
+		<a class="title" href="/logout">Logout</a>
+	</div>
+  <form method="POST" action="">
     {{ form.hidden_tag() }}
     <div class="container">
       <div class="wrapper">
