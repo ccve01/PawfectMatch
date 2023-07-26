@@ -1,12 +1,12 @@
 import random
 import json
 
-#from characterai import PyCAI
+from characterai import PyCAI
 
 #TODO: change the client token so that the name isnt my own
 
 def get_response(msg, species):
-    client = PyCAI('c43e694469173dee86270d54d98fab46dee96885')
+    client = PyCAI('ebdd055de453633f078b05e426478558fcafa8ce')
 
     # Dog: NOk05AzKadfMKlyLs5vFic1FSMtfZs-9oajfdf_An1g
     # Cat: 9AqE4wu-geCCAddV-NEQGYCWGGlKQLB0h58pmW8dKV0

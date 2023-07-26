@@ -156,7 +156,7 @@ body {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    background: var(--primary);
+    background: #ff9fae;
     color: white;
 }
 
